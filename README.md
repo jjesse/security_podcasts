@@ -124,9 +124,51 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - The 443 Security Simplified
 
+  - A podcast presented by Security Simplified where they talk with white-hat hackers and security researchers
+
+  - Found here: <https://www.secplicity.org/category/the-443/>
+
 - Open Source Security Podcast
 
-- Hacker Valley Studio Podcast
+  - Created by josh Bressers and Kurt Seifried
+
+  - Found here: <https://opensourcesecurity.io/category/podcast/>
+
+- Hacker Valley Media
+
+  - This is a group of podcasts including
+
+    - Hacker Valley Studio
+
+      - Hosted by Ron Eddings and Chris Cochran sharing inspirational stories
+
+      - Found at: <https://hackervalley.com/show/hackervalley/>
+
+  - Technically Divided
+
+    - Focused on picking a side in some big divisive topics
+
+    - Found at: <https://hackervalley.com/show/technically-divided/>
+
+  - Cyber Ranch
+
+    - CISO Allan Alford hosts this podcast
+
+    - Found at: <https://hackervalley.com/show/cyberranch/>
+
+  - Hacker Valley Blue
+
+    - Explore the defensive side of cybersecurity
+
+    - Found at: <https://hackervalley.com/show/hacker-valley-blue/>
+
+  - Hacker Valley Red
+
+    - Focused on Red Teaming
+
+    - Found at: <https://hackervalley.com/show/hacker-valley-red/>
+
+- 
 
 - Cyber Security Sauna
 
@@ -150,7 +192,17 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - What The Shell
 
+  - Podcast that talks about major hacks and vulnerabilities with John Kordis as the host
+
+  - Found here: <https://whattheshellpod.com/>
+
 - We Talk Cyber
+
+  - Monica Verma is the host and CISO.
+
+  - YouTube channel is found here: <https://www.youtube.com/monicatalkscyber>
+
+  - Podcast and website is found here: <https://monicatalkscyber.com/podcasts>
 
 - Absolute AppSec
 
