@@ -168,27 +168,60 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
     - Found at: <https://hackervalley.com/show/hacker-valley-red/>
 
-- 
 
 - Cyber Security Sauna
 
+  - Found at: <https://cybersecuritysauna.libsyn.com/>
+
 - SANS Internet Stormcenter Daily Cyber Podcast (Stormcast)
+
+  - Found at: <https://isc.sans.edu/podcast/>
 
 - Defrag This
 
+  - Found here: <https://defragthis.libsyn.com/>
+
 - Cyber Work
+
+  - A podcast geared towards breaking into the cyber security world
+
+  - Found at: <https://www.infosecinstitute.com/podcast/>
 
 - Security in Five
 
+  - Found at: <https://securityinfive.libsyn.com/>
+
 - OWASP Podcast
+
+  - Brought to you by the Open Web Application Security Project (OWASP)
+
+  - Hosted by Mark Miller, Matt Tesauro, and Vandana Verma Sehgal
+
+  - Found at: <https://owasp.org/www-project-podcast/>
 
 - The Shared Security Show
 
+  - A weekly YouTube show that focuses on trust in people and technology
+
+  - Found at: <https://www.youtube.com/c/SharedSecurityPodcast/>
+
 - The Cyberlaw Podcast
+
+  - Hosted by Stewart Baker a partner at Steptoe & Johnson LLP focused on Law and Technology
+
+  - Found at: <https://www.lawfareblog.com/topic/cyberlaw-podcast>
 
 - 7 Minute Security
 
+  - A 7 minute long podcast discussing various security related topics
+
+  - Found here: <https://7minsec.com/projects/podcast/>
+
 - Task Force 7 Cyber Security Radio
+
+  - "the Voice of Cyber Security around the globe"
+
+  - Found at: <https://www.tf7radio.com/>
 
 - What The Shell
 
