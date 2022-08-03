@@ -8,7 +8,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Can be found at: <https://thehackermind.com/>
 
-    - From the website "an original podcast from ForAllSecure. It's the stories from the indviduals behind the hacks you've read about..."
+  - From the website "an original podcast from ForAllSecure. It's the stories from the indviduals behind the hacks you've read about..."
 
 - Adopting Zero Trust
 
