@@ -294,3 +294,9 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - "Talk shop with pen testers, hackers, and the unsung heroes of the cybersecurity world"
 
   - Found at: <https://www.beyondtrust.com/podcast>
+
+- Black Hills Information Security Podcast
+
+  - Sponsored by the group "Black Hills Security"
+
+  - Found here: <https://jjesse.github.io/security_podcasts/>
