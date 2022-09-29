@@ -300,3 +300,17 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - Sponsored by the group "Black Hills Security"
 
   - Found here: <https://jjesse.github.io/security_podcasts/>
+
+- Real Talk with Aaron Bregg
+
+  - Security podcast interview style
+
+  - Found here: <https://hashtagrealtalk.buzzsprout.com/>
+
+-  Not Another Demo
+
+  - Podcast sponsored and run by the West Michgan Cloud Security Alliance
+
+  - Interviews and discussion with Security Vendors, but powerpoint isn't allowed
+
+  - Found at: <https://www.youtube.com/c/CSAWestMichigan>
