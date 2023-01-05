@@ -168,7 +168,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
     - Found at: <https://hackervalley.com/show/hacker-valley-red/>
 
-
 - Cyber Security Sauna
 
   - Found at: <https://cybersecuritysauna.libsyn.com/>
@@ -307,10 +306,18 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found here: <https://hashtagrealtalk.buzzsprout.com/>
 
--  Not Another Demo
+- Not Another Demo
 
   - Podcast sponsored and run by the West Michgan Cloud Security Alliance
 
   - Interviews and discussion with Security Vendors, but powerpoint isn't allowed
 
   - Found at: <https://www.youtube.com/c/CSAWestMichigan>
+
+- Defensive Security Podcast
+
+  - Taken from the "About" page: "Attempt to look at security news and pick out lessons we can apply to keep organizations secure"
+
+  - Host is the same person who runs the infosec.exchange (<infosec.exchange>) Mastadon instance
+
+  - Found at <https://defensivesecurity.org/about/>
