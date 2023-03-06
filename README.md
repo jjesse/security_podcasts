@@ -96,12 +96,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://nakedsecurity.sophos.com/podcast/>
 
-- Crypto-Gram Security Podcast
-
-  - Audio of Bruce Schneier's Monthly Crypto-Gram Security Newsletter
-
-  - Found at: <https://crypto-gram.libsyn.com/>
-
 - The Privacy, Security, & OSINT Show
 
   - Hosted by Michael Bazzell and covers "ways to help you become digitally invisible, stay secure from cyber threats, and make you a better online investegator."
@@ -196,7 +190,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Hosted by Mark Miller, Matt Tesauro, and Vandana Verma Sehgal
 
-  - Found at: <https://owasp.org/www-project-podcast/>
+  - Found at: <https://soundcloud.com/owasp-podcast>
 
 - The Shared Security Show
 
@@ -293,12 +287,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - "Talk shop with pen testers, hackers, and the unsung heroes of the cybersecurity world"
 
   - Found at: <https://www.beyondtrust.com/podcast>
-
-- Black Hills Information Security Podcast
-
-  - Sponsored by the group "Black Hills Security"
-
-  - Found here: <https://jjesse.github.io/security_podcasts/>
 
 - Real Talk with Aaron Bregg
 
