@@ -8,7 +8,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Can be found at: <https://thehackermind.com/>
 
-  - From the website "an original podcast from ForAllSecure. It's the stories from the indviduals behind the hacks you've read about..."
+  - From the website "an original podcast from ForAllSecure. It's the stories from the individuals behind the hacks you've read about..."
 
 - Adopting Zero Trust
 
@@ -36,7 +36,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://shellsharks.com/podcast>
 
-  - This podcast coers infosec, tehcnology and life in general
+  - This podcast covers infosec, technology and life in general
 
 - Smashing Security
 
@@ -112,7 +112,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Hosted by Dave Bittner and Joe Carrigan
   
-  - A behind scense look at social engineering, phishing and exploits
+  - A behind scenes look at social engineering, phishing and exploits
 
   - Found at: <https://thecyberwire.com/podcasts/hacking-humans>
 
@@ -256,13 +256,13 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - The Hacker Chronicles Podcast
 
-  - Spondosred by Tenable (tenable.com)
+  - Sponsored by Tenable (tenable.com)
 
   - Found at: <https://www.tenable.com/podcast/hacker-chronicles>
 
 - Simply Cyber
 
-  - Infomration Security YouTube channel and podcast
+  - Information Security YouTube channel and podcast
 
   - Hosted by Gerald Auger
 
@@ -296,7 +296,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - Not Another Demo
 
-  - Podcast sponsored and run by the West Michgan Cloud Security Alliance
+  - Podcast sponsored and run by the West Michigan Cloud Security Alliance
 
   - Interviews and discussion with Security Vendors, but powerpoint isn't allowed
 
@@ -306,7 +306,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Taken from the "About" page: "Attempt to look at security news and pick out lessons we can apply to keep organizations secure"
 
-  - Host is the same person who runs the infosec.exchange (<infosec.exchange>) Mastadon instance
+  - Host is the same person who runs the infosec.exchange (<infosec.exchange>) Mastodon instance
 
   - Found at <https://defensivesecurity.org/about/>
-
