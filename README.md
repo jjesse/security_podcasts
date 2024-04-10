@@ -4,12 +4,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 ## On to the Podcasts
 
-- The Hacker Mind
-
-  - Can be found at: <https://thehackermind.com/>
-
-  - From the website "an original podcast from ForAllSecure. It's the stories from the individuals behind the hacks you've read about..."
-
 - Adopting Zero Trust
 
   - Can be found on Apple Podcasts and other podcast platforms: <https://podcasts.apple.com/us/podcast/adopting-zero-trust/id1633461773>
@@ -24,19 +18,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
     - Application Security Weekly: <https://securityweekly.com/category-shows/application-security-weekly/>
 
-    - Security & Compliance Weekly: <https://securityweekly.com/category-shows/security-and-compliance-weekly/>
-
     - Security Weekly News: <https://securityweekly.com/category-shows/security-weekly-news/>
-
-    - Tradecraft Security Weekly: <https://securityweekly.com/category-shows/tradecraft-security-weekly/>
-
-    - Secure Digital Life: <https://securedigitallife.com/>
-
-- The Shellsharks Podcast
-
-  - Found at: <https://shellsharks.com/podcast>
-
-  - This podcast covers infosec, technology and life in general
 
 - Smashing Security
 
@@ -49,12 +31,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - "True stories from the dark side of the Internet
 
   - Found at: <https://darknetdiaries.com/episode/>
-
-- The Virtual CISO Moment
-
-  - "Information Security for Small and Midsized Businesses"
-
-  - Found at: <https://virtual-ciso.us/>
 
 - CyberWire Daily
 
@@ -89,18 +65,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - Sponsored by Cybereason and covers stories around hacks, hacking, malware, and others
 
   - Found at: <https://malicious.life/>
-
-- Naked Security Podcast
-
-  - Sponsored by Sophos
-
-  - Found at: <https://nakedsecurity.sophos.com/podcast/>
-
-- The Privacy, Security, & OSINT Show
-
-  - Hosted by Michael Bazzell and covers "ways to help you become digitally invisible, stay secure from cyber threats, and make you a better online investegator."
-
-  - Found at: <https://www.inteltechniques.com/podcast.html>
 
 - InfoSec Real
 
@@ -138,30 +102,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
       - Found at: <https://hackervalley.com/show/hackervalley/>
 
-  - Technically Divided
-
-    - Focused on picking a side in some big divisive topics
-
-    - Found at: <https://hackervalley.com/show/technically-divided/>
-
-  - Cyber Ranch
-
-    - CISO Allan Alford hosts this podcast
-
-    - Found at: <https://hackervalley.com/show/cyberranch/>
-
-  - Hacker Valley Blue
-
-    - Explore the defensive side of cybersecurity
-
-    - Found at: <https://hackervalley.com/show/hacker-valley-blue/>
-
-  - Hacker Valley Red
-
-    - Focused on Red Teaming
-
-    - Found at: <https://hackervalley.com/show/hacker-valley-red/>
-
 - Cyber Security Sauna
 
   - Found at: <https://cybersecuritysauna.libsyn.com/>
@@ -180,47 +120,17 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://www.infosecinstitute.com/podcast/>
 
-- Security in Five
-
-  - Found at: <https://securityinfive.libsyn.com/>
-
-- OWASP Podcast
-
-  - Brought to you by the Open Web Application Security Project (OWASP)
-
-  - Hosted by Mark Miller, Matt Tesauro, and Vandana Verma Sehgal
-
-  - Found at: <https://soundcloud.com/owasp-podcast>
-
 - The Shared Security Show
 
   - A weekly YouTube show that focuses on trust in people and technology
 
   - Found at: <https://www.youtube.com/c/SharedSecurityPodcast/>
 
-- The Cyberlaw Podcast
-
-  - Hosted by Stewart Baker a partner at Steptoe & Johnson LLP focused on Law and Technology
-
-  - Found at: <https://www.lawfareblog.com/topic/cyberlaw-podcast>
-
-- 7 Minute Security
-
-  - A 7 minute long podcast discussing various security related topics
-
-  - Found here: <https://7minsec.com/projects/podcast/>
-
 - Task Force 7 Cyber Security Radio
 
   - "the Voice of Cyber Security around the globe"
 
   - Found at: <https://www.tf7radio.com/>
-
-- What The Shell
-
-  - Podcast that talks about major hacks and vulnerabilities with John Kordis as the host
-
-  - Found here: <https://whattheshellpod.com/>
 
 - We Talk Cyber
 
@@ -242,12 +152,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://secure-anchor.com/podcast/>
 
-- 8th Layer Insights
-
-  - Explores the complexities of human nature and how they affect security and risk
-
-  - Found at: <https://thecyberwire.com/podcasts/8th-layer-insights>
-
 - Click Here
 
   - Sponsored by Recorded Future and a new episode comes out every Tuesday
@@ -267,18 +171,6 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - Hosted by Gerald Auger
 
   - Found at:<https://www.simplycyber.io/podcast>
-
-- H4unt3d Hacker
-
-  - Podcast that is live every Saturday at 4pm CST
-
-  - Hosted by Mike Jones and Mike LeBlanc
-  
-  - Can be found at: <https://thehauntedhacker.com/podcasts>
-
-- 2 Cyber Chicks
-
-  - Found on any podcast app, but also here for a link: <https://podcasts.apple.com/us/podcast/2-cyber-chicks/id1612548862>
 
 - Adventures of Alice and Bob
 
@@ -308,4 +200,51 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Host is the same person who runs the infosec.exchange (<infosec.exchange>) Mastodon instance
 
-  - Found at <https://defensivesecurity.org/about/>
+  - Found at <https://podcasts.apple.com/us/podcast/defensive-security-podcast-malware-hacking-cyber-security/id585914973>
+
+## Archived Podcasts
+
+These podcasts are no long making new episodes but might be interesting from a historical point of view:
+
+- 2 Cyber Chicks
+
+  - Found on any podcast app, but also here for a link: <https://podcasts.apple.com/us/podcast/2-cyber-chicks/id1612548862>
+
+- H4unt3d Hacker
+
+  - Podcast that is live every Saturday at 4pm CST
+
+  - Hosted by Mike Jones and Mike LeBlanc
+  
+  - Can be found at: <https://thehauntedhacker.com/podcasts>
+
+- 8th Layer Insights
+  - Explores the complexities of human nature and how they affect security and risk
+
+  - Found at: <https://thecyberwire.com/podcasts/8th-layer-insights>
+
+- What The Shell
+
+  - Podcast that talks about major hacks and vulnerabilities with John Kordis as the host
+
+  - Found here: <https://whattheshellpod.com/>
+
+- 7 Minute Security
+
+  - A 7 minute long podcast discussing various security related topics
+
+  - Found here: <https://7minsec.com/projects/podcast/>
+
+- The Cyberlaw Podcast
+
+  - Hosted by Stewart Baker a partner at Steptoe & Johnson LLP focused on Law and Technology
+
+  - Found at: <https://www.lawfareblog.com/topic/cyberlaw-podcast>
+
+- OWASP Podcast
+
+  - Brought to you by the Open Web Application Security Project (OWASP)
+
+  - Hosted by Mark Miller, Matt Tesauro, and Vandana Verma Sehgal
+
+  - Found at: <https://soundcloud.com/owasp-podcast>
