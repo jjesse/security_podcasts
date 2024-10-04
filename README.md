@@ -8,13 +8,19 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Can be found on Apple Podcasts and other podcast platforms: <https://podcasts.apple.com/us/podcast/adopting-zero-trust/id1633461773>
 
+  - Podcast Index Link: <https://podcastindex.org/podcast/5573682>
+
 - Security Weekly
 
   - This is a collection of multiple podcasts and can be found at: <https://securityweekly.com/>
 
     - Paul's Security Weekly: <https://securityweekly.com/category-shows/paul-security-weekly/>
+      
+      - Podcast Index Link: <https://podcastindex.org/podcast/977160>
 
     - Enterprise Security Weekly: <https://securityweekly.com/category-shows/enterprise-security-weekly/>
+
+      - Podcast Index Link: <https://podcastindex.org/podcast/787162>
 
     - Application Security Weekly: <https://securityweekly.com/category-shows/application-security-weekly/>
 
@@ -31,6 +37,8 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - "True stories from the dark side of the Internet
 
   - Found at: <https://darknetdiaries.com/episode/>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/577105>
 
 - CyberWire Daily
 
