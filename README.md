@@ -15,7 +15,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
   - This is a collection of multiple podcasts and can be found at: <https://securityweekly.com/>
 
     - Paul's Security Weekly: <https://securityweekly.com/category-shows/paul-security-weekly/>
-      
+
       - Podcast Index Link: <https://podcastindex.org/podcast/977160>
 
     - Enterprise Security Weekly: <https://securityweekly.com/category-shows/enterprise-security-weekly/>
@@ -24,7 +24,11 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
     - Application Security Weekly: <https://securityweekly.com/category-shows/application-security-weekly/>
 
+      - Podcast Index Link: <https://podcastindex.org/podcast/436683>
+
     - Security Weekly News: <https://securityweekly.com/category-shows/security-weekly-news/>
+
+      - Podcast Index Link: <https://podcastindex.org/podcast/760301>
 
 - Smashing Security
 
