@@ -1,8 +1,7 @@
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Function to read websites from a file
 def read_websites_from_file(file_path):
@@ -41,29 +40,42 @@ def get_last_modified(url):
 def check_websites(websites):
     data = []
     now = datetime.now()
+    thirty_days_ago = now - timedelta(days=30)
 
     for site in websites:
         last_modified = get_last_modified(site)
+        if last_modified:
+            last_modified_str = last_modified.strftime("%Y-%m-%d %H:%M:%S")
+            is_active = "Yes" if last_modified >= thirty_days_ago else "No"
+        else:
+            last_modified_str = "Unknown"
+            is_active = "Unknown"
+
         data.append({
             'Website': site,
             'Last Checked': now.strftime("%Y-%m-%d %H:%M:%S"),
-            'Last Updated': last_modified.strftime("%Y-%m-%d %H:%M:%S") if last_modified else "Unknown"
+            'Last Updated': last_modified_str,
+            'Active': is_active
         })
     
     # Create a pandas DataFrame
     df = pd.DataFrame(data)
     return df
 
-# Main function to read websites from file and check them
+# Main function to read websites from file, check them, and save to CSV
 def main():
     file_path = 'websites.txt'  # Change this path if your file is located elsewhere
+    output_csv = 'podcast_update.csv'
     websites = read_websites_from_file(file_path)
     if not websites:
         print("No websites found or error reading file.")
         return
 
     df = check_websites(websites)
-    print(df)
+
+    # Save the DataFrame to a CSV file
+    df.to_csv(output_csv, index=False)
+    print(f"Data saved to {output_csv}")
 
 # Run the main function
 if __name__ == "__main__":
