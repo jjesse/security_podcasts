@@ -4,17 +4,17 @@ Having just discovered Podcast Index ActivityPub support, here is a list of my c
 
 • Malicious Life @460150 with Ran Levi at Cybereason
 
-• Random but Memorable @236393 with @mattdavey, @MrRooni, and Anna Eastick at @1password
+• Random but Memorable @236393 with @mattdavey, @MrRooni (<https://mastodon.social/@MrRooni>), and Anna Eastick at @1password
 
 • Hacking Humans @1021915 with @bittner, @jtcarrigan and @varmazis at @N2K
 
-• Darknet Diaries @577105 with Jack Rhysider @jackrhysider
+• Darknet Diaries @577105 with Jack Rhysider @jackrhysider (<https://infosec.exchange/@jackrhysider>)
 
 • SANS Internet Stormcenter Daily Cyber Security Podcast (Stormcast) @571906 with @jullrich at @sans_isc
 
 • Risky Business @548735 and Risky Business News @5423259  with @riskybusiness, @tomatospy, @campuscodi, Adam Boileau, @thegrugq, and Claire Aird
 
-• Defensive Security Podcast @735955 with @jerry and @lerg
+• Defensive Security Podcast @735955 with @jerry (<https://infosec.exchange/@jerry>) and @lerg
 
 • Open Source Security Podcast @518991 with   @kurtseifried (<https://infosec.exchange/@kurtseifried>) and @joshbressers (<https://infosec.exchange/@joshbressers>)
 

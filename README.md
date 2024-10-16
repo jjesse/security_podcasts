@@ -32,9 +32,11 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - Smashing Security
 
-  - "News and vies from the world of cybersecurity, hacking and internet threats
+  - "News and views from the world of cybersecurity, hacking and internet threats
 
   - Found at: <https://www.smashingsecurity.com/>
+
+  - Podcast Index Link <https://podcastindex.org/podcast/453614>
 
 - Darknet Diaries
 
@@ -50,6 +52,8 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://thecyberwire.com/podcasts/daily-podcast>
 
+  - Podcast Index Link: <https://podcastindex.org/podcast/454880>
+
 - 401 Access Denied
 
   - Hosted by Joesph Carson and sponsored by Delinea
@@ -58,11 +62,15 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at <https://delinea.com/events/podcasts>
 
+  - Podcast Index Link: <https://podcastindex.org/podcast/1193578>
+
 - Security Now
 
-  - Hosted by Steve Gibson and Leo Laporte
+  - Hosted by Steve Gibson <(<https://infosec.exchange/@SGgrc>>) and Leo Laporte <https://twit.social/@leo>
 
   - Found at: <https://twit.tv/shows/security-now>
+
+  - Podcast Index Link <https://podcastindex.org/podcast/202764>
 
 - The Social-Engineer Podcast
 
@@ -72,11 +80,15 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://risky.biz/>
 
+  - Podcast Index Link <https://podcastindex.org/podcast/548735>
+
 - Malicious Life
 
   - Sponsored by Cybereason and covers stories around hacks, hacking, malware, and others
 
   - Found at: <https://malicious.life/>
+
+  - Podcast Index Link <https://podcastindex.org/podcast/460150>
 
 - InfoSec Real
 
@@ -86,11 +98,13 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - Hacking Humans
 
-  - Hosted by Dave Bittner and Joe Carrigan
+  - Hosted by Dave Bittner (<https://hachyderm.io/@bittner>) and Joe Carrigan
   
   - A behind scenes look at social engineering, phishing and exploits
 
   - Found at: <https://thecyberwire.com/podcasts/hacking-humans>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/1021915>
 
 - The 443 Security Simplified
 
@@ -100,9 +114,11 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 - Open Source Security Podcast
 
-  - Created by josh Bressers and Kurt Seifried
+  - Created by Josh Bressers and Kurt Seifried
 
   - Found here: <https://opensourcesecurity.io/category/podcast/>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/518991>
 
 - Hacker Valley Media
 
@@ -114,9 +130,13 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
       - Found at: <https://hackervalley.com/show/hackervalley/>
 
+      - Podcast Index Link: <https://podcastindex.org/podcast/344898>
+
 - Cyber Security Sauna
 
   - Found at: <https://cybersecuritysauna.libsyn.com/>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/408993?episode=17888545940>
 
 - SANS Internet Stormcenter Daily Cyber Podcast (Stormcast)
 
@@ -260,3 +280,5 @@ These podcasts are no long making new episodes but might be interesting from a h
   - Hosted by Mark Miller, Matt Tesauro, and Vandana Verma Sehgal
 
   - Found at: <https://soundcloud.com/owasp-podcast>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/503232>
