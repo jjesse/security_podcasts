@@ -236,7 +236,7 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
 ## Archived Podcasts
 
-These podcasts are no long making new episodes but might be interesting from a historical point of view:
+These podcasts are no longer making new episodes but might be interesting from a historical point of view:
 
 - 2 Cyber Chicks
 
