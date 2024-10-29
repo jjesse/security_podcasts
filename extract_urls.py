@@ -1,13 +1,13 @@
 import re
 
-# Function to extract URLs from the markdown file
-def extract_urls_from_markdown(file_path):
+# Function to extract URLs containing 'podcastindex.org' from the markdown file
+def extract_podcastindex_urls(file_path):
     try:
         with open(file_path, 'r') as file:
             content = file.read()
 
-        # Regular expression to match URLs in markdown format
-        url_pattern = r'(https?://[^\s\)]+)'  # Matches 'http' or 'https' URLs
+        # Regular expression to match URLs that contain 'podcastindex.org'
+        url_pattern = r'(https?://[^\s\)]+podcastindex\.org[^\s\)]*)'
 
         # Find all URLs using the regex pattern
         urls = re.findall(url_pattern, content)
@@ -32,12 +32,12 @@ def main():
     input_file = 'readme.md'  # Path to the markdown file
     output_file = 'websites.txt'  # Path to save the URLs
 
-    urls = extract_urls_from_markdown(input_file)
+    urls = extract_podcastindex_urls(input_file)
 
     if urls:
         save_urls_to_file(urls, output_file)
     else:
-        print("No URLs found or error occurred.")
+        print("No URLs containing 'podcastindex.org' found or error occurred.")
 
 # Run the main function
 if __name__ == "__main__":
