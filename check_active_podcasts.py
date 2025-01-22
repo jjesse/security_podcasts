@@ -2,13 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime, timedelta
+import re
 
-# Function to read websites from a file
-def read_websites_from_file(file_path):
+# Function to read podcastindex URLs from README.md
+def read_podcastindex_urls_from_readme(file_path):
     try:
         with open(file_path, 'r') as file:
-            websites = [line.strip() for line in file.readlines() if line.strip()]
-        return websites
+            content = file.read()
+
+        # Regular expression to match URLs that contain 'podcastindex.org'
+        url_pattern = r'(https?://[^\s\)]+podcastindex\.org[^\s\)]*)'
+
+        # Find all URLs using the regex pattern
+        urls = re.findall(url_pattern, content)
+        return urls
+
     except Exception as e:
         print(f"Error reading file: {e}")
         return []
@@ -62,20 +70,26 @@ def check_websites(websites):
     df = pd.DataFrame(data)
     return df
 
-# Main function to read websites from file, check them, and save to CSV
+# Main function to read URLs from README.md, check them, and save to CSV
 def main():
-    file_path = 'websites.txt'  # Change this path if your file is located elsewhere
+    readme_file = 'README.md'  # Path to the markdown file
     output_csv = 'podcast_update.csv'
-    websites = read_websites_from_file(file_path)
-    if not websites:
-        print("No websites found or error reading file.")
+    active_podcasts_csv = 'podcast_status.csv'
+    urls = read_podcastindex_urls_from_readme(readme_file)
+    if not urls:
+        print("No URLs found or error reading file.")
         return
 
-    df = check_websites(websites)
+    df = check_websites(urls)
 
     # Save the DataFrame to a CSV file
     df.to_csv(output_csv, index=False)
     print(f"Data saved to {output_csv}")
+
+    # Filter active podcasts and save to a separate CSV file
+    active_podcasts = df[df['Active'] == 'Yes'][['Website', 'Last Updated']]
+    active_podcasts.to_csv(active_podcasts_csv, index=False)
+    print(f"Active podcasts saved to {active_podcasts_csv}")
 
 # Run the main function
 if __name__ == "__main__":

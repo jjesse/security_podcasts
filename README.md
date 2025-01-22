@@ -76,6 +76,8 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://www.social-engineer.org/podcasts/>
 
+  - Podcast Index Link <https://podcastindex.org/podcast/542370>
+
 - Risky Business
 
   - Found at: <https://risky.biz/>
@@ -112,6 +114,8 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found here: <https://www.secplicity.org/category/the-443/>
 
+  - Podcast Index Link: <https://podcastindex.org/podcast/743510>
+
 - Open Source Security Podcast
 
   - Created by Josh Bressers and Kurt Seifried
@@ -142,9 +146,13 @@ Recently there was a post (<https://www.reddit.com/r/cybersecurity/comments/w8wb
 
   - Found at: <https://isc.sans.edu/podcast/>
 
+  - Podcast Index Link: <https://podcastindex.org/podcast/571906>
+
 - Defrag This
 
   - Found here: <https://defragthis.libsyn.com/>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/223607>
 
 - Cyber Work
 
