@@ -1,0 +1,10 @@
+[2024-01-17]
+- Initial setup of podcast tracking system
+- Created main README.md explaining the system
+- Implemented podcast status checking script
+- Added List_of_podcast.md with comprehensive podcast directory
+- Set up CSV output files for tracking podcast status
+
+[2024-01-17 - Update 2]
+- Removed podcast list from README.md to reduce duplication
+- Added Python package requirements to README.md
