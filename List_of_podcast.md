@@ -294,3 +294,9 @@ These podcasts are no longer making new episodes but might be interesting from a
   - Found at: <https://soundcloud.com/owasp-podcast>
 
   - Podcast Index Link: <https://podcastindex.org/podcast/503232>
+
+- The Watchers
+
+  - Found at: <https://www.youtube.com/@TheWatchersPod>
+
+  - Podcast Index Link: <https://podcastindex.org/podcast/6963123>
