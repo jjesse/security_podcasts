@@ -1,1 +1,4 @@
 theme: jekyll-theme-minimal
+
+sass:
+  quiet_deps: true
