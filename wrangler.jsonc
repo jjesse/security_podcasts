@@ -4,5 +4,8 @@
   "compatibility_date": "2026-05-03",
   "assets": {
     "directory": "./_site"
+  },
+  "build": {
+    "command": "bundle exec jekyll build"
   }
 }
