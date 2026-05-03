@@ -38,6 +38,14 @@ To check podcast status:
 python check_active_podcasts.py
 ```
 
+## Deployment
+
+This site is deployed to [Cloudflare Pages](https://pages.cloudflare.com/). On every push to `main`, the GitHub Actions workflow in `.github/workflows/deploy.yml` builds the Jekyll site and deploys it via the Cloudflare Wrangler action.
+
+To enable deployments, add the following secrets to the repository:
+- `CLOUDFLARE_API_TOKEN` – Cloudflare API token with Pages edit permissions
+- `CLOUDFLARE_ACCOUNT_ID` – Your Cloudflare account ID
+
 ## Updates
 
 See `changelog.txt` for a detailed history of updates and changes to the podcast list and system.
