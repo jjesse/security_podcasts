@@ -72,7 +72,7 @@ def check_websites(websites):
 
 # Main function to read URLs from README.md, check them, and save to CSV
 def main():
-    readme_file = 'README.md'  # Path to the markdown file
+    readme_file = 'List_of_podcast.md'  # Path to the markdown file
     output_csv = 'podcast_update.csv'
     active_podcasts_csv = 'podcast_status.csv'
     urls = read_podcastindex_urls_from_readme(readme_file)
