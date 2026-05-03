@@ -4,18 +4,50 @@ import csv
 from datetime import datetime, timedelta
 
 # Constants
-MARKDOWN_FILE = 'readme.md'
+MARKDOWN_FILE = 'List_of_podcast.md'
 OUTPUT_TEXT_FILE = 'urls.txt'
 OUTPUT_CSV_FILE = 'url_status.csv'
 CURRENT_THRESHOLD = datetime.now() - timedelta(days=30)
 TIMEOUT = 10  # seconds
 
+# Social media and profile-only domains to ignore when checking podcast activity
+IGNORED_DOMAINS = [
+    'twitter.com',
+    'x.com',
+    'hachyderm.io',
+    'infosec.exchange',
+    'twit.social',
+    'mastodon.social',
+    'mastodon.online',
+    'fosstodon.org',
+    'reddit.com',
+]
+
+# YouTube channel/profile patterns that aren't podcast episode pages
+IGNORED_URL_PATTERNS = [
+    r'https?://(?:www\.)?youtube\.com/(?:c/|@|channel/)[^/\s\)]+/?$',
+    r'https?://(?:www\.)?youtube\.com/monicatalkscyber',
+]
+
+
+def is_ignored_url(url):
+    """Return True if the URL belongs to a social media or non-podcast domain."""
+    for domain in IGNORED_DOMAINS:
+        if re.search(r'https?://(?:[^/]*\.)?' + re.escape(domain), url):
+            return True
+    for pattern in IGNORED_URL_PATTERNS:
+        if re.match(pattern, url):
+            return True
+    return False
+
+
 def extract_urls_from_markdown(file_path):
-    """Extract all URLs from a markdown file."""
+    """Extract podcast-relevant URLs from a markdown file, skipping social media links."""
     try:
         with open(file_path, 'r') as file:
             content = file.read()
-        return re.findall(r'https?://[^\s\)]+', content)
+        all_urls = re.findall(r'https?://[^\s\)<>]+', content)
+        return [url for url in all_urls if not is_ignored_url(url)]
     except FileNotFoundError:
         print(f"Error: {file_path} not found.")
         return []
@@ -66,7 +98,7 @@ def save_data_to_csv(data, file_path):
         print(f"Error writing to {file_path}: {e}")
 
 def main():
-    # Step 1: Extract URLs from markdown file
+    # Step 1: Extract URLs from markdown file (social media links are excluded)
     urls = extract_urls_from_markdown(MARKDOWN_FILE)
     if not urls:
         print("No URLs found or file is missing.")

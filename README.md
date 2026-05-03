@@ -24,11 +24,27 @@ pip install pandas
 
 The system uses a Python script (`check_active_podcasts.py`) to:
 
-1. Read podcast URLs from the markdown file
+1. Read podcast URLs from `List_of_podcast.md` (only `podcastindex.org` links)
 2. Check each podcast's last update time
 3. Generate two CSV files:
    - `podcast_status.csv`: Shows only active podcasts (updated within 30 days)
    - `podcast_update.csv`: Shows all podcasts with their current status
+
+`check_active_sites.py` provides a broader check across all podcast website URLs in
+`List_of_podcast.md`, automatically skipping social media and profile links (Twitter/X,
+Mastodon instances, Reddit, YouTube channel pages) so only actual podcast sites are
+validated.
+
+## Automated Validation
+
+A scheduled GitHub Actions workflow (`.github/workflows/check_podcasts.yml`) runs every
+Monday and:
+
+1. Executes `check_active_podcasts.py`
+2. Commits updated `podcast_update.csv` and `podcast_status.csv` back to the repository
+
+You can also trigger the workflow manually from the **Actions** tab using the
+"Run workflow" button.
 
 ## Usage
 
