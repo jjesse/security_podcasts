@@ -2,4 +2,3 @@ __pycache__/
 *.py[cod]
 *.pyo
 urls.txt
-url_status.csv

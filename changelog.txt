@@ -1,3 +1,15 @@
+[2026-06-01]
+- Added test suite (tests/test_url_extraction.py) covering URL extraction and filtering logic
+- Fixed regex bug in read_podcastindex_urls_from_readme: changed [^\s\)]+ to [^\s\)<>]* so bare https://podcastindex.org/... URLs are correctly extracted
+- Added HTTP retries, request timeouts, and multi-format date parsing to check_active_podcasts.py
+- Added HTTP retries and multi-format date parsing to check_active_sites.py
+- Added CSV schema validation to both scripts (validate_csv)
+- Added requirements.txt for reproducible dependency installs
+- Added .github/workflows/tests.yml: runs test suite on every push and pull request
+- Updated .github/workflows/check_podcasts.yml: installs from requirements.txt, also runs check_active_sites.py, and commits url_status.csv
+- Removed url_status.csv from .gitignore so it is tracked alongside the other CSV reports
+- Updated README.md: consolidated install instructions, documented both scripts and their outputs, added test usage
+
 [2024-01-17]
 - Initial setup of podcast tracking system
 - Created main README.md explaining the system
