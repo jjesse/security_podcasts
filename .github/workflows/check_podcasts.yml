@@ -27,17 +27,20 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 pandas
+        run: pip install -r requirements.txt
 
       - name: Run podcast activity check
         run: python check_active_podcasts.py
 
-      - name: Commit updated CSV reports
+      - name: Run site activity check
+        run: python check_active_sites.py
+
+      - name: Commit updated reports
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add podcast_update.csv podcast_status.csv
+          git add podcast_update.csv podcast_status.csv url_status.csv
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
