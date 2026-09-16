@@ -4,6 +4,7 @@ import sys
 import tempfile
 import pytest
 from datetime import timezone
+import check_active_podcasts as cap
 
 # Add the repository root to sys.path so we can import the scripts directly
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -335,6 +336,39 @@ class TestRssFeedLogic:
         assert dt.year == 2025
         assert dt.month == 8
         assert dt.day == 21
+
+    def test_check_websites_falls_back_to_direct_feed_url(self, monkeypatch):
+        class Response:
+            def __init__(self, content=b'', text='', headers=None):
+                self.content = content
+                self.text = text
+                self.headers = headers or {}
+
+            def raise_for_status(self):
+                return None
+
+        class Session:
+            def __init__(self):
+                self.calls = 0
+
+            def get(self, *_args, **_kwargs):
+                self.calls += 1
+                if self.calls == 1:
+                    return Response(
+                        content=b'<html><body>feed page</body></html>',
+                        text='<html><body>feed page</body></html>',
+                        headers={'Content-Type': 'text/html'},
+                    )
+                return Response(
+                    content=b'<?xml version="1.0"?><rss version="2.0"><channel><item><pubDate>Tue, 09 Sep 2025 12:00:00 GMT</pubDate></item></channel></rss>',
+                    text='',
+                    headers={'Content-Type': 'application/rss+xml'},
+                )
+
+        monkeypatch.setattr(cap, "_make_session", lambda: Session())
+        df = cap.check_websites(["https://example.com/feed"])
+        assert df.iloc[0]["Last Updated"] != "Unknown"
+        assert df.iloc[0]["Active"] in {"Yes", "No"}
 
 
 # ---------------------------------------------------------------------------

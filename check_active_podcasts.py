@@ -273,6 +273,8 @@ def check_websites(websites):
 
     for site in websites:
         feed_url = discover_feed_url(site, session)
+        if feed_url is None and _looks_like_feed_url(site):
+            feed_url = site
         latest_episode_date = get_latest_episode_date_from_feed(feed_url, session) if feed_url else None
         if latest_episode_date:
             last_modified_str = latest_episode_date.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
