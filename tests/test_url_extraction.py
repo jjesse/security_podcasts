@@ -321,6 +321,21 @@ class TestRssFeedLogic:
         assert dt is not None
         assert dt.year == 2025
 
+    def test_get_latest_episode_date_from_rdf_feed(self):
+        xml = b"""<?xml version="1.0"?>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <channel rdf:about="https://example.com/" />
+          <item rdf:about="https://example.com/ep1"><dc:date>2025-08-20T10:00:00Z</dc:date></item>
+          <item rdf:about="https://example.com/ep2"><dc:date>2025-08-21T11:00:00Z</dc:date></item>
+        </rdf:RDF>
+        """
+        dt = get_latest_episode_date_from_feed("https://example.com/rdf.xml", _FakeSession(xml))
+        assert dt is not None
+        assert dt.year == 2025
+        assert dt.month == 8
+        assert dt.day == 21
+
 
 # ---------------------------------------------------------------------------
 # validate_csv — check_active_podcasts

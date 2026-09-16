@@ -196,11 +196,7 @@ def discover_feed_url(url, session):
             return url if _is_feed_xml_document(response_content) else None
 
         discovered_feed_url = _extract_feed_url_from_html(url, response_text)
-
-        # If URL looks like a feed endpoint but served HTML, prefer discovered explicit feed URL
-        if discovered_feed_url:
-            return discovered_feed_url
-        return url if _looks_like_feed_url(url) and _is_feed_xml_document(response_content) else None
+        return discovered_feed_url
     except requests.RequestException as e:
         print(f"Error discovering feed for {url}: {e}")
         return None
