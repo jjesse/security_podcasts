@@ -108,9 +108,7 @@ def _looks_like_feed_url(url):
     return (
         path.endswith('.xml')
         or path.endswith('.rss')
-        or '/feed' in path
-        or 'rss' in path
-        or 'atom' in path
+        or re.search(r'(^|/)(feed|rss|atom)(/|$)', path) is not None
     )
 
 
@@ -169,9 +167,6 @@ def _extract_feed_url_from_html(page_url, html_content):
 
 def discover_feed_url(url, session):
     """Discover an RSS/Atom feed URL from a podcast page URL."""
-    if _looks_like_feed_url(url):
-        return url
-
     try:
         response = session.get(url, timeout=TIMEOUT)
         response.raise_for_status()
@@ -200,8 +195,13 @@ def discover_feed_url(url, session):
         if looks_like_xml:
             return url if _is_feed_xml_document(response_content) else None
 
-        return _extract_feed_url_from_html(url, response_text)
-    except Exception as e:
+        discovered_feed_url = _extract_feed_url_from_html(url, response_text)
+
+        # If URL looks like a feed endpoint but served HTML, prefer discovered explicit feed URL
+        if discovered_feed_url:
+            return discovered_feed_url
+        return url if _looks_like_feed_url(url) and _is_feed_xml_document(response_content) else None
+    except requests.RequestException as e:
         print(f"Error discovering feed for {url}: {e}")
         return None
 
@@ -218,7 +218,7 @@ def get_latest_episode_date_from_feed(feed_url, session):
         elif isinstance(response_content, str):
             response_content = response_content.encode('utf-8', errors='ignore')
         root = ET.fromstring(response_content)
-    except Exception as e:
+    except (requests.RequestException, ET.ParseError, ValueError, TypeError) as e:
         print(f"Error fetching/parsing feed {feed_url}: {e}")
         return None
 
