@@ -3,8 +3,11 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import re
+from email.utils import parsedate_to_datetime
+from urllib.parse import urljoin, urlparse
+import xml.etree.ElementTree as ET
 
 TIMEOUT = 10  # seconds per request
 
@@ -22,9 +25,32 @@ PODCAST_STATUS_COLUMNS = ['Website', 'Last Updated']
 
 def _parse_date(date_str):
     """Try to parse a date string using known formats. Returns datetime or None."""
+    if not date_str:
+        return None
+
+    # Common RFC 822/2822 date format used by RSS pubDate
+    try:
+        parsed = parsedate_to_datetime(date_str.strip())
+        if parsed:
+            if parsed.tzinfo is None:
+                return parsed.replace(tzinfo=timezone.utc)
+            return parsed
+    except (TypeError, ValueError):
+        pass
+
+    # ISO 8601 formats (with and without Z)
+    try:
+        iso_candidate = date_str.strip().replace("Z", "+00:00")
+        parsed = datetime.fromisoformat(iso_candidate)
+        if parsed.tzinfo is None:
+            return parsed.replace(tzinfo=timezone.utc)
+        return parsed
+    except ValueError:
+        pass
+
     for fmt in DATE_FORMATS:
         try:
-            return datetime.strptime(date_str.strip(), fmt)
+            return datetime.strptime(date_str.strip(), fmt).replace(tzinfo=timezone.utc)
         except ValueError:
             continue
     return None
@@ -75,48 +101,122 @@ def read_podcastindex_urls_from_readme(file_path):
 
 
 # Function to get the last modified date from headers or meta tags
-def get_last_modified(url):
-    session = _make_session()
+def _looks_like_feed_url(url):
+    """Return True if URL appears to directly reference a feed."""
+    parsed = urlparse(url)
+    path = parsed.path.lower()
+    return (
+        path.endswith('.xml')
+        or path.endswith('.rss')
+        or '/feed' in path
+        or 'rss' in path
+        or 'atom' in path
+    )
+
+
+def _extract_feed_url_from_html(page_url, html_content):
+    """Extract feed URL from HTML via link rel=alternate or feed-like anchors."""
+    soup = BeautifulSoup(html_content, 'html.parser')
+    candidates = []
+
+    # Preferred: explicit feed declarations
+    for link in soup.find_all('link', href=True):
+        rel_values = link.get('rel') or []
+        rel_text = " ".join(rel_values).lower() if isinstance(rel_values, list) else str(rel_values).lower()
+        type_text = (link.get('type') or '').lower()
+        href = urljoin(page_url, link['href'])
+        if ('alternate' in rel_text and 'xml' in type_text) or ('rss' in type_text) or ('atom' in type_text):
+            candidates.append(href)
+
+    # Fallback: feed-like anchors
+    for anchor in soup.find_all('a', href=True):
+        href = urljoin(page_url, anchor['href'])
+        lowered = href.lower()
+        if any(token in lowered for token in ['/feed', 'rss', '.xml', 'atom']):
+            candidates.append(href)
+
+    seen = set()
+    for candidate in candidates:
+        if candidate.startswith(('http://', 'https://')) and candidate not in seen:
+            seen.add(candidate)
+            return candidate
+    return None
+
+
+def discover_feed_url(url, session):
+    """Discover an RSS/Atom feed URL from a podcast page URL."""
+    if _looks_like_feed_url(url):
+        return url
+
     try:
         response = session.get(url, timeout=TIMEOUT)
         response.raise_for_status()
 
-        # Check the 'Last-Modified' header
-        last_modified = response.headers.get('Last-Modified')
-        if last_modified:
-            parsed = _parse_date(last_modified)
-            if parsed:
-                return parsed
+        content_type = (response.headers.get('Content-Type') or '').lower()
+        body_prefix = response.text[:512].lower()
+        if 'xml' in content_type or body_prefix.lstrip().startswith('<?xml') or '<rss' in body_prefix or '<feed' in body_prefix:
+            return url
 
-        # If no header, check the meta tags in HTML
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # Attempt to find meta tags that indicate last modified time
-        meta_date = (
-            soup.find('meta', {'http-equiv': 'last-modified'})
-            or soup.find('meta', {'name': 'last-modified'})
-        )
-        if meta_date and meta_date.get('content'):
-            parsed = _parse_date(meta_date['content'])
-            if parsed:
-                return parsed
-
+        return _extract_feed_url_from_html(url, response.text)
     except Exception as e:
-        print(f"Error checking {url}: {e}")
-    return None
+        print(f"Error discovering feed for {url}: {e}")
+        return None
+
+
+def get_latest_episode_date_from_feed(feed_url, session):
+    """Fetch feed and return latest episode publication datetime or None."""
+    try:
+        response = session.get(feed_url, timeout=TIMEOUT)
+        response.raise_for_status()
+        root = ET.fromstring(response.content)
+    except Exception as e:
+        print(f"Error fetching/parsing feed {feed_url}: {e}")
+        return None
+
+    def _local_tag(tag_name):
+        return tag_name.split('}')[-1].lower() if isinstance(tag_name, str) else ''
+
+    date_tags = {'pubdate', 'published', 'updated', 'date'}
+    episode_dates = []
+
+    # Prefer episode-level dates from <item> (RSS) and <entry> (Atom)
+    for element in root.iter():
+        local_name = _local_tag(element.tag)
+        if local_name in {'item', 'entry'}:
+            for child in list(element):
+                child_local = _local_tag(child.tag)
+                if child_local in date_tags and child.text:
+                    parsed = _parse_date(child.text)
+                    if parsed:
+                        episode_dates.append(parsed)
+
+    if episode_dates:
+        return max(episode_dates)
+
+    # Fallback: channel-level dates if episode-level dates are unavailable
+    for element in root.iter():
+        local_name = _local_tag(element.tag)
+        if local_name in {'lastbuilddate', 'pubdate', 'updated'} and element.text:
+            parsed = _parse_date(element.text)
+            if parsed:
+                episode_dates.append(parsed)
+
+    return max(episode_dates) if episode_dates else None
 
 
 # Function to check all websites and build a table
 def check_websites(websites):
     data = []
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     thirty_days_ago = now - timedelta(days=30)
+    session = _make_session()
 
     for site in websites:
-        last_modified = get_last_modified(site)
-        if last_modified:
-            last_modified_str = last_modified.strftime("%Y-%m-%d %H:%M:%S")
-            is_active = "Yes" if last_modified >= thirty_days_ago else "No"
+        feed_url = discover_feed_url(site, session)
+        latest_episode_date = get_latest_episode_date_from_feed(feed_url, session) if feed_url else None
+        if latest_episode_date:
+            last_modified_str = latest_episode_date.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+            is_active = "Yes" if latest_episode_date >= thirty_days_ago else "No"
         else:
             last_modified_str = "Unknown"
             is_active = "Unknown"
