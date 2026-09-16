@@ -337,7 +337,7 @@ class TestRssFeedLogic:
         assert dt.month == 8
         assert dt.day == 21
 
-    def test_check_websites_falls_back_to_direct_feed_url(self, monkeypatch):
+    def test_check_websites_uses_direct_feed_url_without_discovery(self, monkeypatch):
         class Response:
             def __init__(self, content=b'', text='', headers=None):
                 self.content = content
@@ -353,22 +353,18 @@ class TestRssFeedLogic:
 
             def get(self, *_args, **_kwargs):
                 self.calls += 1
-                if self.calls == 1:
-                    return Response(
-                        content=b'<html><body>feed page</body></html>',
-                        text='<html><body>feed page</body></html>',
-                        headers={'Content-Type': 'text/html'},
-                    )
                 return Response(
                     content=b'<?xml version="1.0"?><rss version="2.0"><channel><item><pubDate>Tue, 09 Sep 2025 12:00:00 GMT</pubDate></item></channel></rss>',
                     text='',
                     headers={'Content-Type': 'application/rss+xml'},
                 )
 
-        monkeypatch.setattr(cap, "_make_session", lambda: Session())
+        session = Session()
+        monkeypatch.setattr(cap, "_make_session", lambda: session)
         df = cap.check_websites(["https://example.com/feed"])
         assert df.iloc[0]["Last Updated"] != "Unknown"
         assert df.iloc[0]["Active"] in {"Yes", "No"}
+        assert session.calls == 1
 
 
 # ---------------------------------------------------------------------------
