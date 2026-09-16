@@ -152,12 +152,22 @@ def discover_feed_url(url, session):
         response = session.get(url, timeout=TIMEOUT)
         response.raise_for_status()
 
-        content_type = (response.headers.get('Content-Type') or '').lower()
-        body_prefix = response.text[:512].lower()
+        headers = getattr(response, 'headers', {}) or {}
+        content_type = (headers.get('Content-Type') or '').lower()
+
+        response_text = getattr(response, 'text', None)
+        if response_text is None:
+            response_content = getattr(response, 'content', b'')
+            if isinstance(response_content, bytes):
+                response_text = response_content.decode('utf-8', errors='ignore')
+            else:
+                response_text = str(response_content)
+
+        body_prefix = response_text[:512].lower()
         if 'xml' in content_type or body_prefix.lstrip().startswith('<?xml') or '<rss' in body_prefix or '<feed' in body_prefix:
             return url
 
-        return _extract_feed_url_from_html(url, response.text)
+        return _extract_feed_url_from_html(url, response_text)
     except Exception as e:
         print(f"Error discovering feed for {url}: {e}")
         return None

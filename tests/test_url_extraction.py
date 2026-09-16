@@ -13,6 +13,7 @@ from check_active_podcasts import (
     validate_csv as validate_csv_podcasts,
     _parse_date as parse_date_podcasts,
     _extract_feed_url_from_html,
+    discover_feed_url,
     get_latest_episode_date_from_feed,
 )
 from check_active_sites import (
@@ -270,6 +271,21 @@ class TestRssFeedLogic:
         assert dt.month == 8
         assert dt.day == 21
         assert dt.astimezone(timezone.utc).hour == 11
+
+    def test_discover_feed_url_handles_minimal_response_object(self):
+        class MinimalResponse:
+            def __init__(self, content):
+                self.content = content
+
+            def raise_for_status(self):
+                return None
+
+        class MinimalSession:
+            def get(self, *_args, **_kwargs):
+                return MinimalResponse(b'<?xml version="1.0"?><rss version="2.0"></rss>')
+
+        discovered = discover_feed_url("https://example.com/podcast", MinimalSession())
+        assert discovered == "https://example.com/podcast"
 
 
 # ---------------------------------------------------------------------------
