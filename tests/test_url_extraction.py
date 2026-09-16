@@ -3,6 +3,8 @@ import os
 import sys
 import tempfile
 import pytest
+from datetime import timezone
+import check_active_podcasts as cap
 
 # Add the repository root to sys.path so we can import the scripts directly
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -11,6 +13,9 @@ from check_active_podcasts import (
     read_podcastindex_urls_from_readme,
     validate_csv as validate_csv_podcasts,
     _parse_date as parse_date_podcasts,
+    _extract_feed_url_from_html,
+    discover_feed_url,
+    get_latest_episode_date_from_feed,
 )
 from check_active_sites import (
     is_ignored_url,
@@ -206,6 +211,160 @@ class TestParseDate:
 
     def test_empty_string_returns_none(self):
         assert parse_date_podcasts("") is None
+
+
+# ---------------------------------------------------------------------------
+# RSS feed discovery and parsing
+# ---------------------------------------------------------------------------
+
+class _FakeResponse:
+    def __init__(self, content):
+        self.content = content
+
+    def raise_for_status(self):
+        return None
+
+
+class _FakeSession:
+    def __init__(self, content):
+        self._content = content
+
+    def get(self, *_args, **_kwargs):
+        return _FakeResponse(self._content)
+
+
+class TestRssFeedLogic:
+    def test_extract_feed_url_from_html_uses_link_alternate(self):
+        html = """
+        <html><head>
+          <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        </head><body></body></html>
+        """
+        feed_url = _extract_feed_url_from_html("https://example.com/podcast", html)
+        assert feed_url == "https://example.com/feed.xml"
+
+    def test_get_latest_episode_date_from_rss_items(self):
+        xml = b"""<?xml version="1.0"?>
+        <rss version="2.0">
+          <channel>
+            <item><title>A</title><pubDate>Mon, 01 Sep 2025 12:00:00 GMT</pubDate></item>
+            <item><title>B</title><pubDate>Tue, 09 Sep 2025 12:00:00 GMT</pubDate></item>
+          </channel>
+        </rss>
+        """
+        dt = get_latest_episode_date_from_feed("https://example.com/feed.xml", _FakeSession(xml))
+        assert dt is not None
+        assert dt.year == 2025
+        assert dt.month == 9
+        assert dt.day == 9
+        assert dt.tzinfo is not None
+
+    def test_get_latest_episode_date_from_atom_entries(self):
+        xml = b"""<?xml version="1.0" encoding="utf-8"?>
+        <feed xmlns="http://www.w3.org/2005/Atom">
+          <entry><title>One</title><updated>2025-08-20T10:00:00Z</updated></entry>
+          <entry><title>Two</title><updated>2025-08-21T11:00:00Z</updated></entry>
+        </feed>
+        """
+        dt = get_latest_episode_date_from_feed("https://example.com/atom.xml", _FakeSession(xml))
+        assert dt is not None
+        assert dt.year == 2025
+        assert dt.month == 8
+        assert dt.day == 21
+        assert dt.astimezone(timezone.utc).hour == 11
+
+    def test_discover_feed_url_handles_minimal_response_object(self):
+        class MinimalResponse:
+            def __init__(self, content):
+                self.content = content
+
+            def raise_for_status(self):
+                return None
+
+        class MinimalSession:
+            def get(self, *_args, **_kwargs):
+                return MinimalResponse(b'<?xml version="1.0"?><rss version="2.0"></rss>')
+
+        discovered = discover_feed_url("https://example.com/podcast", MinimalSession())
+        assert discovered == "https://example.com/podcast"
+
+    def test_discover_feed_url_rejects_non_feed_xml(self):
+        class MinimalResponse:
+            def __init__(self, content):
+                self.content = content
+
+            def raise_for_status(self):
+                return None
+
+        class MinimalSession:
+            def get(self, *_args, **_kwargs):
+                return MinimalResponse(b'<?xml version="1.0"?><urlset><url><loc>https://example.com/</loc></url></urlset>')
+
+        discovered = discover_feed_url("https://example.com/podcast", MinimalSession())
+        assert discovered is None
+
+    def test_get_latest_episode_date_supports_text_only_response(self):
+        class TextOnlyResponse:
+            def __init__(self, text):
+                self.text = text
+                self.content = b''
+
+            def raise_for_status(self):
+                return None
+
+        class TextOnlySession:
+            def get(self, *_args, **_kwargs):
+                return TextOnlyResponse(
+                    '<?xml version="1.0"?><rss version="2.0"><channel><item><pubDate>Tue, 09 Sep 2025 12:00:00 GMT</pubDate></item></channel></rss>'
+                )
+
+        dt = get_latest_episode_date_from_feed("https://example.com/feed.xml", TextOnlySession())
+        assert dt is not None
+        assert dt.year == 2025
+
+    def test_get_latest_episode_date_from_rdf_feed(self):
+        xml = b"""<?xml version="1.0"?>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <channel rdf:about="https://example.com/" />
+          <item rdf:about="https://example.com/ep1"><dc:date>2025-08-20T10:00:00Z</dc:date></item>
+          <item rdf:about="https://example.com/ep2"><dc:date>2025-08-21T11:00:00Z</dc:date></item>
+        </rdf:RDF>
+        """
+        dt = get_latest_episode_date_from_feed("https://example.com/rdf.xml", _FakeSession(xml))
+        assert dt is not None
+        assert dt.year == 2025
+        assert dt.month == 8
+        assert dt.day == 21
+
+    def test_check_websites_uses_direct_feed_url_without_discovery(self, monkeypatch):
+        class Response:
+            def __init__(self, content=b'', text='', headers=None):
+                self.content = content
+                self.text = text
+                self.headers = headers or {}
+
+            def raise_for_status(self):
+                return None
+
+        class Session:
+            def __init__(self):
+                self.calls = 0
+
+            def get(self, *_args, **_kwargs):
+                self.calls += 1
+                return Response(
+                    content=b'<?xml version="1.0"?><rss version="2.0"><channel><item><pubDate>Tue, 09 Sep 2025 12:00:00 GMT</pubDate></item></channel></rss>',
+                    text='',
+                    headers={'Content-Type': 'application/rss+xml'},
+                )
+
+        session = Session()
+        monkeypatch.setattr(cap, "_make_session", lambda: session)
+        df = cap.check_websites(["https://example.com/feed"])
+        assert df.iloc[0]["Last Updated"] != "Unknown"
+        assert df.iloc[0]["Active"] in {"Yes", "No"}
+        assert session.calls == 1
 
 
 # ---------------------------------------------------------------------------

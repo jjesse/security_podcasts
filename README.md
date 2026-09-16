@@ -25,8 +25,8 @@ Python 3.8+ is required.
 
 ## How It Works
 
-**`check_active_podcasts.py`** reads `podcastindex.org` links from `List_of_podcast.md`, checks
-each podcast's last update time via HTTP, and generates two CSV files:
+**`check_active_podcasts.py`** reads `podcastindex.org` links from `List_of_podcast.md`, discovers
+podcast RSS/Atom feeds, checks each feed's latest episode publish date, and generates two CSV files:
 - `podcast_status.csv`: Only podcasts updated within the last 30 days
 - `podcast_update.csv`: All podcasts with their current status
 
@@ -36,7 +36,7 @@ Mastodon instances, Reddit, YouTube channel pages) so only actual podcast sites 
 validated. Results are written to `url_status.csv`.
 
 Both scripts include automatic retries on transient network errors and handle multiple
-date-header formats to reduce `Unknown` results.
+date formats to reduce `Unknown` results.
 
 ## Automated Validation
 
