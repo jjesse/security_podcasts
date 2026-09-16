@@ -114,6 +114,30 @@ def _looks_like_feed_url(url):
     )
 
 
+def _local_tag(tag_name):
+    """Strip XML namespace from a tag and normalize case."""
+    return tag_name.split('}')[-1].lower() if isinstance(tag_name, str) else ''
+
+
+def _is_feed_xml_document(content_bytes):
+    """Return True only when XML content appears to be RSS/Atom feed XML."""
+    try:
+        root = ET.fromstring(content_bytes)
+    except ET.ParseError:
+        return False
+
+    root_local = _local_tag(root.tag)
+    if root_local in {'rss', 'feed'}:
+        return True
+
+    # RSS 1.0 may use <rdf:RDF> with channel/item nodes
+    if root_local == 'rdf':
+        child_tags = {_local_tag(child.tag) for child in list(root)}
+        return 'channel' in child_tags or 'item' in child_tags
+
+    return False
+
+
 def _extract_feed_url_from_html(page_url, html_content):
     """Extract feed URL from HTML via link rel=alternate or feed-like anchors."""
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -155,17 +179,26 @@ def discover_feed_url(url, session):
         headers = getattr(response, 'headers', {}) or {}
         content_type = (headers.get('Content-Type') or '').lower()
 
+        response_content = getattr(response, 'content', b'')
+        if isinstance(response_content, str):
+            response_content = response_content.encode('utf-8', errors='ignore')
+
         response_text = getattr(response, 'text', None)
         if response_text is None:
-            response_content = getattr(response, 'content', b'')
             if isinstance(response_content, bytes):
                 response_text = response_content.decode('utf-8', errors='ignore')
             else:
                 response_text = str(response_content)
 
         body_prefix = response_text[:512].lower()
-        if 'xml' in content_type or body_prefix.lstrip().startswith('<?xml') or '<rss' in body_prefix or '<feed' in body_prefix:
-            return url
+        looks_like_xml = (
+            'xml' in content_type
+            or body_prefix.lstrip().startswith('<?xml')
+            or '<rss' in body_prefix
+            or '<feed' in body_prefix
+        )
+        if looks_like_xml:
+            return url if _is_feed_xml_document(response_content) else None
 
         return _extract_feed_url_from_html(url, response_text)
     except Exception as e:
@@ -182,9 +215,6 @@ def get_latest_episode_date_from_feed(feed_url, session):
     except Exception as e:
         print(f"Error fetching/parsing feed {feed_url}: {e}")
         return None
-
-    def _local_tag(tag_name):
-        return tag_name.split('}')[-1].lower() if isinstance(tag_name, str) else ''
 
     date_tags = {'pubdate', 'published', 'updated', 'date'}
     episode_dates = []
@@ -203,8 +233,26 @@ def get_latest_episode_date_from_feed(feed_url, session):
     if episode_dates:
         return max(episode_dates)
 
-    # Fallback: channel-level dates if episode-level dates are unavailable
-    for element in root.iter():
+    # Fallback: feed metadata dates only (not recursive across all nodes)
+    feed_metadata_container = None
+    root_local = _local_tag(root.tag)
+    if root_local == 'rss':
+        for child in list(root):
+            if _local_tag(child.tag) == 'channel':
+                feed_metadata_container = child
+                break
+    elif root_local in {'feed', 'channel'}:
+        feed_metadata_container = root
+    elif root_local == 'rdf':
+        for child in list(root):
+            if _local_tag(child.tag) == 'channel':
+                feed_metadata_container = child
+                break
+
+    if feed_metadata_container is None:
+        return None
+
+    for element in list(feed_metadata_container):
         local_name = _local_tag(element.tag)
         if local_name in {'lastbuilddate', 'pubdate', 'updated'} and element.text:
             parsed = _parse_date(element.text)

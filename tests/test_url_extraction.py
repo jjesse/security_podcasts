@@ -287,6 +287,21 @@ class TestRssFeedLogic:
         discovered = discover_feed_url("https://example.com/podcast", MinimalSession())
         assert discovered == "https://example.com/podcast"
 
+    def test_discover_feed_url_rejects_non_feed_xml(self):
+        class MinimalResponse:
+            def __init__(self, content):
+                self.content = content
+
+            def raise_for_status(self):
+                return None
+
+        class MinimalSession:
+            def get(self, *_args, **_kwargs):
+                return MinimalResponse(b'<?xml version="1.0"?><urlset><url><loc>https://example.com/</loc></url></urlset>')
+
+        discovered = discover_feed_url("https://example.com/podcast", MinimalSession())
+        assert discovered is None
+
 
 # ---------------------------------------------------------------------------
 # validate_csv — check_active_podcasts
