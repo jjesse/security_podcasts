@@ -302,6 +302,25 @@ class TestRssFeedLogic:
         discovered = discover_feed_url("https://example.com/podcast", MinimalSession())
         assert discovered is None
 
+    def test_get_latest_episode_date_supports_text_only_response(self):
+        class TextOnlyResponse:
+            def __init__(self, text):
+                self.text = text
+                self.content = b''
+
+            def raise_for_status(self):
+                return None
+
+        class TextOnlySession:
+            def get(self, *_args, **_kwargs):
+                return TextOnlyResponse(
+                    '<?xml version="1.0"?><rss version="2.0"><channel><item><pubDate>Tue, 09 Sep 2025 12:00:00 GMT</pubDate></item></channel></rss>'
+                )
+
+        dt = get_latest_episode_date_from_feed("https://example.com/feed.xml", TextOnlySession())
+        assert dt is not None
+        assert dt.year == 2025
+
 
 # ---------------------------------------------------------------------------
 # validate_csv — check_active_podcasts

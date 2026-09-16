@@ -211,7 +211,13 @@ def get_latest_episode_date_from_feed(feed_url, session):
     try:
         response = session.get(feed_url, timeout=TIMEOUT)
         response.raise_for_status()
-        root = ET.fromstring(response.content)
+        response_content = getattr(response, 'content', b'')
+        if response_content in (None, b''):
+            response_text = getattr(response, 'text', '')
+            response_content = response_text.encode('utf-8', errors='ignore')
+        elif isinstance(response_content, str):
+            response_content = response_content.encode('utf-8', errors='ignore')
+        root = ET.fromstring(response_content)
     except Exception as e:
         print(f"Error fetching/parsing feed {feed_url}: {e}")
         return None
